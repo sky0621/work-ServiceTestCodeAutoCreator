@@ -1,10 +1,5 @@
 <project name="example-s2jdbc-gen" default="gen-entity" basedir=".">
 
-  <condition property="vmarg.encoding" value="-Dfile.encoding=UTF-8" else="">
-    <isset property="eclipse.pdebuild.home"/>
-  </condition>
-
-
   <path id="classpath">
     <pathelement location="build"/>
     <fileset dir="lib">
@@ -22,7 +17,6 @@
       javafileencoding="UTF-8"
       jdbcmanagername="jdbcManager"
       classpathref="classpath">
-        <jvmarg value="${vmarg.encoding}"/>
     </gen-entity>
   </target>
 
