@@ -1,0 +1,9 @@
+#Fri Aug 15 16:18:06 JST 2008
+DaoType=S2JDBC
+DefaultResourcePath=/work-ServiceTestCodeAutoCreator/src/main/resources
+DefaultRootPackage=examples
+DefaultSrcPath=/work-ServiceTestCodeAutoCreator/src/main/java
+UseDIMarker=false
+UsePageMarker=false
+ViewType=SA-Struts
+eclipse.preferences.version=1
