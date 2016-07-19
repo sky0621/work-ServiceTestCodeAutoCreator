@@ -1,4 +1,4 @@
-package examples.entity;
+package rootpackage.entity;
 
 import java.io.Serializable;
 import javax.annotation.Generated;
@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
  * 
  */
 @Entity
-@Generated(value = {"S2JDBC-Gen 2.4.48", "org.seasar.extension.jdbc.gen.internal.model.EntityModelFactoryImpl"}, date = "2016/07/19 23:31:02")
+@Generated(value = {"S2JDBC-Gen 2.4.48", "org.seasar.extension.jdbc.gen.internal.model.EntityModelFactoryImpl"}, date = "2016/07/20 0:16:04")
 public class TrnViewHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package examples.entity;
+package rootpackage.entity;
 
 import java.io.Serializable;
 import javax.annotation.Generated;
@@ -8,12 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
- * TrnFavoriteエンティティクラス
+ * RelCategoryMovieエンティティクラス
  * 
  */
 @Entity
-@Generated(value = {"S2JDBC-Gen 2.4.48", "org.seasar.extension.jdbc.gen.internal.model.EntityModelFactoryImpl"}, date = "2016/07/19 23:31:02")
-public class TrnFavorite implements Serializable {
+@Generated(value = {"S2JDBC-Gen 2.4.48", "org.seasar.extension.jdbc.gen.internal.model.EntityModelFactoryImpl"}, date = "2016/07/20 0:16:04")
+public class RelCategoryMovie implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,14 +21,14 @@ public class TrnFavorite implements Serializable {
     @Column(precision = 10, nullable = false, unique = false)
     public Long mstMovieMovieId;
 
-    /** mstUserIdプロパティ */
+    /** mstCategoryCategoryIdプロパティ */
     @Column(precision = 10, nullable = false, unique = false)
-    public Long mstUserId;
+    public Long mstCategoryCategoryId;
 
-    /** mstUser関連プロパティ */
+    /** mstCategory関連プロパティ */
     @ManyToOne
-    @JoinColumn(name = "mst_user_id", referencedColumnName = "id")
-    public MstUser mstUser;
+    @JoinColumn(name = "mst_category_category_id", referencedColumnName = "category_id")
+    public MstCategory mstCategory;
 
     /** mstMovie関連プロパティ */
     @ManyToOne
