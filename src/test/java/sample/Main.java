@@ -2,45 +2,53 @@ package sample;
 
 import static com.ninja_squad.dbsetup.Operations.*;
 
+import java.util.Map;
+
 import com.ninja_squad.dbsetup.DbSetup;
-import com.ninja_squad.dbsetup.destination.Destination;
-import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
+import com.ninja_squad.dbsetup.operation.Insert.Builder;
+import com.ninja_squad.dbsetup.operation.Insert.RowBuilder;
 import com.ninja_squad.dbsetup.operation.Operation;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Destination dest =
-            new DriverManagerDestination(
-                "jdbc:mysql://localhost:3306/ym",
-                "root",
-                "root");
+        MstMovie mm = new MstMovie();
 
-        Operation DELETE_PARTIAL = sql("delete from character where age < 20");
+        Operation DELETE_PARTIAL = sql(mm.createDeleteSql());
 
-        Operation INSERT =
-        // テーブルの指定
-            insertInto("character")
+        Builder builder = insertInto(mm.getTableName());
 
-            // 全てのレコードに同じ値をセットする場合
-                .withDefaultValue("gender", "女性")
+        Map<String, Object> defValueMap = mm.getDefaultValueMap();
+        for (String key : defValueMap.keySet()) {
+            builder = builder.withDefaultValue(key, defValueMap.get(key));
+        }
 
-                // 列の定義
-                .columns("headgear", "clothing", "shoes")
+        for (Map<String, Object> valueMap : mm.getColumnsList()) {
+            RowBuilder rb = builder.row();
+            for (String key : valueMap.keySet()) {
+                rb = rb.column(key, valueMap.get(key));
+            }
+            builder = rb.end();
+        }
 
-                // 1つ目のレコード
-                .values("ヘッドバンド ホワイト", "わかばイカT", "キャンバス ホワイト")
+        Operation INSERT = builder.build();
 
-                // 2つ目のレコード
-                .values("フェイスゴーグル", "スクールブレザー", "パワードレッグス")
-
-                // Operationオブジェクトを作成
-                .build();
+        // // 1行目の作成
+        // .row().column("headgear", "ヘッドバンド ホワイト")
+        // .column("clothing", "わかばイカT")
+        // .column("shoes", "キャンバス ホワイト")
+        // .end()
+        //
+        // // 2行目の作成
+        // .row().column("headgear", "フェイスゴーグル")
+        // .column("clothing", "スクールブレザー")
+        // .column("shoes", "パワードレッグス")
+        // .end()
 
         Operation ops = sequenceOf(DELETE_PARTIAL, INSERT);
 
-        DbSetup dbSetup = new DbSetup(dest, ops);
+        DbSetup dbSetup = new DbSetup(DbSetupUtil.getDestination(), ops);
         dbSetup.launch();
     }
 
