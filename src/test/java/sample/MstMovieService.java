@@ -7,30 +7,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MstMovie extends AbstractEntity {
+public class MstMovieService extends AbstractService {
 
+    /*
+     * Column Name
+     */
     public static final String MOVIE_ID = "MOVIE_ID";
-    public Long movieId;
-
     public static final String MOVIE_TITLE = "MOVIE_TITLE";
-    public String movieTitle = "AutoGen";
-
     public static final String MOVIE_FILENAME = "MOVIE_FILENAME";
-    public String movieFilename = "AutoGen";
-
     public static final String MOVIE_TIME = "MOVIE_TIME";
-    public String movieTime = "AutoGen";
-
     public static final String MOVIE_TAKE_DATE = "MOVIE_TAKE_DATE";
-    public Date movieTakeDate = Calendar.getInstance().getTime();
-
     public static final String DEL_FLG = "DEL_FLG";
-    public Boolean delFlg = false;
-
     public static final String INS_ID = "INS_ID";
+
+    /*
+     * Default Value
+     */
+    public Long movieId;
+    public String movieTitle = "";
+    public String movieFilename = "";
+    public String movieTime = "";
+    public Date movieTakeDate = Calendar.getInstance().getTime();
+    public Boolean delFlg = false;
     public String insId = "AutoGen";
 
     private List<Map<String, Object>> columnsList;
+
+    public MstMovieService() {
+    }
+
+    public MstMovieService(List<Map<String, Object>> columnsList) {
+        this.columnsList = columnsList;
+    }
+
+    public MstMovieService(List<Map<String, Object>> columnsList, String insId) {
+        this.columnsList = columnsList;
+        this.insId = insId;
+    }
 
     @Override
     public String getTableName() {
@@ -45,7 +58,6 @@ public class MstMovie extends AbstractEntity {
     @Override
     public Map<String, Object> getDefaultValueMap() {
         Map<String, Object> map = new HashMap<String, Object>();
-//        map.put(MOVIE_ID, movieId);
         map.put(MOVIE_TITLE, movieTitle);
         map.put(MOVIE_FILENAME, movieFilename);
         map.put(MOVIE_TIME, movieTime);
@@ -65,7 +77,7 @@ public class MstMovie extends AbstractEntity {
         if (columnsList == null) {
             columnsList = new ArrayList<Map<String, Object>>();
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put(MOVIE_ID, 999);
+            map.put(MOVIE_ID, 777);
             columnsList.add(map);
         }
         return columnsList;
