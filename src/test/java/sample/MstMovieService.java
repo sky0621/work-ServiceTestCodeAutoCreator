@@ -29,30 +29,16 @@ public class MstMovieService extends AbstractService {
     public String movieTime = "";
     public Date movieTakeDate = Calendar.getInstance().getTime();
     public Boolean delFlg = false;
-    public String insId = "AutoGen";
 
     private List<Map<String, Object>> columnsList;
 
-    public MstMovieService() {
-    }
-
-    public MstMovieService(List<Map<String, Object>> columnsList) {
-        this.columnsList = columnsList;
-    }
-
-    public MstMovieService(List<Map<String, Object>> columnsList, String insId) {
-        this.columnsList = columnsList;
-        this.insId = insId;
+    public MstMovieService(Parameter p) {
+        super(p);
     }
 
     @Override
     public String getTableName() {
         return "mst_movie";
-    }
-
-    @Override
-    public String getWhereString() {
-        return INS_ID + " = \"" + insId + "\"";
     }
 
     @Override
@@ -63,7 +49,7 @@ public class MstMovieService extends AbstractService {
         map.put(MOVIE_TIME, movieTime);
         map.put(MOVIE_TAKE_DATE, movieTakeDate);
         map.put(DEL_FLG, delFlg);
-        map.put(INS_ID, insId);
+        map.put(p.sysColumnName, p.sysColumnValue);
         return map;
     }
 

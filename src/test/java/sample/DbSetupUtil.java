@@ -5,11 +5,9 @@ import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
 
 public class DbSetupUtil {
 
-    public static Destination getDestination() {
-        return new DriverManagerDestination(
-            "jdbc:mysql://localhost:3306/ym",
-            "root",
-            "root");
+    public static Destination getDestination(String dbUrl, String dbUser,
+            String dbPassword) {
+        return new DriverManagerDestination(dbUrl, dbUser, dbPassword);
     }
 
 }

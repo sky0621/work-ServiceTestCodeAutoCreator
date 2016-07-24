@@ -31,6 +31,13 @@ import com.ninja_squad.dbsetup.operation.Operation;
  */
 public abstract class AbstractService {
 
+    protected Parameter p;
+
+    public AbstractService(Parameter p) {
+
+        this.p = p;
+    }
+
     public void operation() {
 
         Operation DELETE_PARTIAL = sql(createDeleteSql());
@@ -54,7 +61,7 @@ public abstract class AbstractService {
 
         Operation ops = sequenceOf(DELETE_PARTIAL, INSERT);
 
-        DbSetup dbSetup = new DbSetup(DbSetupUtil.getDestination(), ops);
+        DbSetup dbSetup = new DbSetup(DbSetupUtil.getDestination(p.dbUrl, p.dbUser, p.dbPassword), ops);
         dbSetup.launch();
     }
 
@@ -64,7 +71,9 @@ public abstract class AbstractService {
 
     public abstract String getTableName();
 
-    public abstract String getWhereString();
+    protected String getWhereString() {
+        return p.sysColumnName + " = \"" + p.sysColumnValue + "\"";
+    }
 
     public abstract Map<String, Object> getDefaultValueMap();
 
