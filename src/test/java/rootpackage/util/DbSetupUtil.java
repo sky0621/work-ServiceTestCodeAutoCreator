@@ -1,4 +1,4 @@
-package sample;
+package rootpackage.util;
 
 import com.ninja_squad.dbsetup.destination.Destination;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;

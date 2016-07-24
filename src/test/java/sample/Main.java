@@ -1,5 +1,7 @@
 package sample;
 
+import rootpackage.Parameter;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -10,7 +12,8 @@ public class Main {
             MstMovieService mm = new MstMovieService(p);
             mm.operation();
 
-        } catch (IllegalArgumentException e) {
+        } catch (Throwable t) {
+            t.printStackTrace();
             System.exit(1);
         }
 

@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import rootpackage.Parameter;
+import rootpackage.parent.AbstractService;
+
 public class MstMovieService extends AbstractService {
 
     /*
